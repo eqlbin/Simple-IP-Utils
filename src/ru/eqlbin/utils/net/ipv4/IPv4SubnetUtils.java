@@ -31,7 +31,7 @@ package ru.eqlbin.utils.net.ipv4;
 public class IPv4SubnetUtils {
     
     public static final int MAX_PREFIX_LENGTH = 32;
-    public static final int MIN_PREFIX_LENGTH = 0;
+    public static final int MIN_PREFIX_LENGTH = 1;
     
     /**
      * Converts an integer representation of the subnet mask in
