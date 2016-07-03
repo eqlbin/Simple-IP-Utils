@@ -52,6 +52,11 @@ public class IPv4UtilsTest {
         assertTrue(asInteger(referenceStringIP) == referenceIntIP);
     }
 
+    @Test(expected = InvalidIPAddressException.class)
+    public void testAsIntegerFromInvalidString() {
+        asInteger(invalidStringIP);
+    }
+    
     @Test
     public void testAsIntegerFromByteArray() {
         assertTrue(asInteger(referenceBytesIP) == referenceIntIP);
@@ -61,15 +66,4 @@ public class IPv4UtilsTest {
     public void testAsStringFromInt() {
         assertTrue(IPv4Utils.asString(referenceIntIP).equals(referenceStringIP));
     }
-
-    @Test(expected = InvalidIPAddressException.class)
-    public void testValidateIPInvalid() {
-        validateIP(invalidStringIP);
-    }
-    
-    @Test
-    public void testValidateIP() {
-        validateIP(referenceStringIP);
-    }
-
 }
