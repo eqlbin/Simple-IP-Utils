@@ -63,7 +63,7 @@ public class IPv4SubnetUtils {
             throw new IllegalArgumentException(
                     "Incorrect routing prefix length: " + routingPrefixLength +
                     ". It must be between " + MIN_PREFIX_LENGTH +" and " + 
-                    MAX_PREFIX_LENGTH + " (inclusive)");
+                    MAX_PREFIX_LENGTH + " (both inclusive)");
         
         int val = 0;
         int shift = MAX_PREFIX_LENGTH;
