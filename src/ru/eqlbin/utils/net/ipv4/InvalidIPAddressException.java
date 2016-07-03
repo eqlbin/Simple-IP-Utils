@@ -1,6 +1,6 @@
 package ru.eqlbin.utils.net.ipv4;
 
-public class InvalidIPAddressException extends RuntimeException {
+public class InvalidIPAddressException extends IPv4Exception {
 
     private static final long serialVersionUID = 1L;
 

@@ -39,12 +39,13 @@ public class IPv4SubnetUtils {
      * 
      * @param subnet mask an integer representation of the subnet mask
      * @return the length of the routing prefix in bits
+     * @throws InvalidSubnetMaskException
      */
     public static int subnetMaskToPrefixLength(int subnetMask){
         
         int prefixLength = Integer.bitCount(subnetMask);
                 
-        if(prefixLengthToSubnetMask(prefixLength) != subnetMask)
+        if(prefixLength < MIN_PREFIX_LENGTH || prefixLengthToSubnetMask(prefixLength) != subnetMask)
             throw new InvalidSubnetMaskException("'"+IPv4Utils.asString(subnetMask)+"'");
         
         return Integer.bitCount(subnetMask);
@@ -60,7 +61,7 @@ public class IPv4SubnetUtils {
     public static int prefixLengthToSubnetMask(int routingPrefixLength){
         
         if(routingPrefixLength < MIN_PREFIX_LENGTH || routingPrefixLength > MAX_PREFIX_LENGTH)
-            throw new IllegalArgumentException(
+            throw new InvalidRoutingPrefixLengthException(
                     "Incorrect routing prefix length: " + routingPrefixLength +
                     ". It must be between " + MIN_PREFIX_LENGTH +" and " + 
                     MAX_PREFIX_LENGTH + " (both inclusive)");
