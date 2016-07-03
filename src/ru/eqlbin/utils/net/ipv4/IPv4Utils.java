@@ -40,8 +40,10 @@ public class IPv4Utils {
      * 
      * @param ip a string representation of the IP address, network or netmask (for example 192.168.1.1)
      * @return IP address as array of bytes
-     * @throws InvalidIPAddressException
-     * @see #validateIP(String)
+     * @throws InvalidIPAddressException if the IP address 
+     * does not match the regular expression 
+     * <code>^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$</code>
+     * 
      */
     public static byte[] asByteArray(String ip){
         validateIP(ip);
@@ -59,8 +61,10 @@ public class IPv4Utils {
      * 
      * @param ip a string representation of the IP address, network or netmask (for example 192.168.1.1)
      * @return an integer representation of the IP address
-     * @throws InvalidIPAddressException
-     * @see #validateIP(String)
+     * @throws InvalidIPAddressException if the IP address 
+     * does not match the regular expression 
+     * <code>^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$</code>
+     * 
      */
     public static int asInteger(String ip) {
         return asInteger(asByteArray(ip));
@@ -105,7 +109,7 @@ public class IPv4Utils {
      * does not match the regular expression 
      * <code>^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$</code>
      */
-    public static void validateIP(String ip) {
+    private static void validateIP(String ip) {
         if(!IP_PATTERN.matcher(ip).matches())
             throw new InvalidIPAddressException("'" + ip +"'");
     }
