@@ -29,7 +29,9 @@ import java.util.regex.Pattern;
  * @author Nikita Shpak aka eqlbin
  *
  */
-public class IPv4Utils {
+public final class IPv4Utils {
+    
+    private IPv4Utils() {}
     
     private static final String REGEXP_0_255 = "(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)";
     private static final Pattern IP_PATTERN = 

@@ -28,7 +28,9 @@ package ru.eqlbin.utils.net.ipv4;
  * @author Nikita Shpak aka eqlbin
  *
  */
-public class IPv4SubnetUtils {
+public final class IPv4SubnetUtils {
+    
+    private IPv4SubnetUtils() {}
     
     public static final int MAX_PREFIX_LENGTH = 32;
     public static final int MIN_PREFIX_LENGTH = 1;
