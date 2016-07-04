@@ -42,13 +42,21 @@ public class IPv4SubnetUtils {
      * @throws InvalidSubnetMaskException
      */
     public static int subnetMaskToPrefixLength(int subnetMask){
-        
+        int prefixLength = validateSubnetMask(subnetMask);
+        return prefixLength;
+    }
+    
+    
+    /**
+     * @param subnetMask
+     * @return routing prefix length if the given subnet mask is valid
+     * @throws InvalidSubnetMaskException
+     */
+    private static int validateSubnetMask(int subnetMask) {
         int prefixLength = Integer.bitCount(subnetMask);
-                
         if(prefixLength < MIN_PREFIX_LENGTH || prefixLengthToSubnetMask(prefixLength) != subnetMask)
             throw new InvalidSubnetMaskException("'"+IPv4Utils.asString(subnetMask)+"'");
-        
-        return Integer.bitCount(subnetMask);
+        return prefixLength;
     }
     
     /**
@@ -57,6 +65,7 @@ public class IPv4SubnetUtils {
      * 
      * @param routingPrefixLength the length of the routing prefix in bits
      * @return an integer representation of the subnet mask
+     * @throws InvalidRoutingPrefixLengthException
      */
     public static int prefixLengthToSubnetMask(int routingPrefixLength){
         
@@ -80,6 +89,7 @@ public class IPv4SubnetUtils {
      * 
      * @param subnet mask an integer representation of the subnet mask
      * @return the count of IP addresses per subnet
+     * @throws InvalidSubnetMaskException
      */
     public static long addressPerSubnetCount(int subnetMask){
        return (long)(Math.pow(2, 32 - subnetMaskToPrefixLength(subnetMask)) - 2);
@@ -90,6 +100,7 @@ public class IPv4SubnetUtils {
      * 
      * @param subnet mask an integer representation of the subnet mask
      * @return the count of subnets
+     * @throws InvalidSubnetMaskException
      */
     public static long subnetCount(int subnetMask){
         return (long)(Math.pow(2, subnetMaskToPrefixLength(subnetMask) % 8));
@@ -102,8 +113,10 @@ public class IPv4SubnetUtils {
      * @param ip an integer representation of the IP address
      * @param subnet mask an integer representation of the subnet mask
      * @return integer an representation of the network
+     * @throws InvalidSubnetMaskException
      */
     public static int network(int ip, int subnetMask){
+        validateSubnetMask(subnetMask);
         return ip & subnetMask;
     } 
     
@@ -113,8 +126,10 @@ public class IPv4SubnetUtils {
      * @param ip an integer representation of the IP address
      * @param subnet mask an integer representation of the subnet mask
      * @return an integer representation of the broadcast address
+     * @throws InvalidSubnetMaskException
      */
     public static int brodcast(int ip, int subnetMask){
+        validateSubnetMask(subnetMask);
         return ip | ~subnetMask;
     }    
 
@@ -127,8 +142,10 @@ public class IPv4SubnetUtils {
      * @param network an integer representation of the network (routing prefix)
      * @param subnet mask an integer representation of the subnet mask
      * @return true if IP in range and false in otherwise
+     * @throws InvalidSubnetMaskException
      */
     public static boolean isInRange(int ip, int network, int subnetMask){
+        validateSubnetMask(subnetMask);
         return ip >= network && ip <= brodcast(network, subnetMask);
     }
 }
