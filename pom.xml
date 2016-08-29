@@ -8,6 +8,20 @@
   <version>0.1-SNAPSHOT</version>
   <name>SimpleIPUtils</name>
   <url>https://github.com/eqlbin/Simple-IP-Utils</url>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+  
+  <developers>
+    <developer>
+      <id>eqlbin</id>
+      <name>Nikita Shpak</name>
+      <email>eqlbin@yandex.ru</email>
+    </developer>
+  </developers>
+
   <build>
     <plugins>
       <plugin>
@@ -31,6 +45,7 @@
       </plugin>
     </plugins>
   </build>
+  
   <dependencies>
   	<dependency>
   		<groupId>junit</groupId>
@@ -39,4 +54,5 @@
   		<scope>test</scope>
   	</dependency>
   </dependencies>
+  
 </project>
